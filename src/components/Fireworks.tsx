@@ -16,8 +16,8 @@ const Fireworks: React.FC = () => {
     setCanvasSize();
     window.addEventListener('resize', setCanvasSize);
 
-    // 对象池配置
-    const POOL_SIZE = 1000;
+    // 减小对象池大小
+    const POOL_SIZE = 500;
     const particlePool: Particle[] = [];
     let poolIndex = 0;
 
@@ -29,17 +29,21 @@ const Fireworks: React.FC = () => {
       alpha: number = 1;
       color: string = '#fff';
       active: boolean = false;
+      size: number = 2;
 
       init(x: number, y: number, color: string) {
         this.x = x;
         this.y = y;
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 2 + 1;
+        // 降低粒子速度
+        const speed = Math.random() * 1.5 + 0.5;
         this.vx = Math.cos(angle) * speed;
         this.vy = Math.sin(angle) * speed;
         this.alpha = 1;
         this.color = color;
         this.active = true;
+        // 随机粒子大小
+        this.size = Math.random() * 1.5 + 0.5;
       }
 
       update() {
@@ -47,10 +51,16 @@ const Fireworks: React.FC = () => {
         
         this.x += this.vx;
         this.y += this.vy;
-        this.vy += 0.03;
-        this.alpha -= 0.008;
+        // 降低重力加速度
+        this.vy += 0.02;
+        // 加快消失速度
+        this.alpha -= 0.01;
 
-        if (this.alpha <= 0) {
+        if (this.alpha <= 0 || 
+            this.x < 0 || 
+            this.x > canvas.width || 
+            this.y < 0 || 
+            this.y > canvas.height) {
           this.active = false;
         }
       }
@@ -61,7 +71,7 @@ const Fireworks: React.FC = () => {
         ctx.globalAlpha = this.alpha;
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
       }
     }
@@ -75,6 +85,8 @@ const Fireworks: React.FC = () => {
     let lastTime = 0;
     const FPS = 60;
     const frameInterval = 1000 / FPS;
+    let lastFireworkTime = 0;
+    const FIREWORK_INTERVAL = 1000; // 限制烟花发射间隔
 
     const getParticle = () => {
       const particle = particlePool[poolIndex];
@@ -82,14 +94,25 @@ const Fireworks: React.FC = () => {
       return particle;
     };
 
-    const createFirework = () => {
+    const isMobile = () => {
+      return window.innerWidth <= 768;
+    };
+
+    const createFirework = (currentTime: number) => {
+      // 控制发射间隔
+      if (currentTime - lastFireworkTime < FIREWORK_INTERVAL) {
+        return;
+      }
+      lastFireworkTime = currentTime;
+
       const x = Math.random() * canvas.width;
       const y = canvas.height;
-      const targetY = Math.random() * (canvas.height * 0.5);
+      const targetY = Math.random() * (canvas.height * 0.6);
       const color = colors[Math.floor(Math.random() * colors.length)];
 
       const explode = (x: number, y: number) => {
-        for (let i = 0; i < 50; i++) {
+        const particleCount = isMobile() ? 20 : 35;
+        for (let i = 0; i < particleCount; i++) {
           const particle = getParticle();
           particle.init(x, y, color);
         }
@@ -97,6 +120,8 @@ const Fireworks: React.FC = () => {
 
       let currentY = y;
       const rise = () => {
+        if (!canvas) return; // 防止组件卸载后继续运行
+        
         ctx.fillStyle = color;
         ctx.beginPath();
         ctx.arc(x, currentY, 2, 0, Math.PI * 2);
@@ -115,20 +140,26 @@ const Fireworks: React.FC = () => {
     };
 
     const animate = (currentTime: number) => {
+      if (!canvas) return; // 防止组件卸载后继续运行
+      
       if (currentTime - lastTime >= frameInterval) {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'; // 增加透明度，减少拖影
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // 批量更新和绘制活跃的粒子
+        let activeCount = 0;
+        
         particlePool.forEach(particle => {
           if (particle.active) {
             particle.update();
             particle.draw();
+            activeCount++;
           }
         });
 
-        if (Math.random() < 0.02) {
-          createFirework();
+        // 严格控制活跃粒子数量
+        const maxActiveParticles = isMobile() ? 50 : 150;
+        if (activeCount < maxActiveParticles) {
+          createFirework(currentTime);
         }
 
         lastTime = currentTime;
@@ -137,10 +168,11 @@ const Fireworks: React.FC = () => {
       requestAnimationFrame(animate);
     };
 
-    requestAnimationFrame(animate);
+    const animationFrame = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('resize', setCanvasSize);
+      cancelAnimationFrame(animationFrame); // 清理动画
     };
   }, []);
 
@@ -158,4 +190,4 @@ const Fireworks: React.FC = () => {
   );
 };
 
-export default Fireworks; 
+export default Fireworks;
