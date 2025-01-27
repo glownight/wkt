@@ -28,7 +28,20 @@ body {
 }
 
 .testp2{
-  color: #85139c;
+  @apply text-xl font-medium relative px-6 py-3;
+  background: linear-gradient(120deg, #9c1f5f, #85139c);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.4s ease;
+}
+
+.testp2:hover {
+  transform: translateX(10px);
+  background: linear-gradient(120deg, #c2185b, #aa00ff);
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
 .spanTextCss{
@@ -42,4 +55,86 @@ body {
 
 .text-glow {
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+/* 日系风格文本样式 */
+.quote-text {
+  @apply text-xl font-light relative px-8 py-4 rounded-sm;
+  background: rgba(255, 255, 255, 0.05);
+  color: #2c3e50;
+  border-left: 3px solid #e67e22;
+  letter-spacing: 2px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.quote-text:hover {
+  @apply transform -translate-y-1;
+  border-left-width: 5px;
+  background: rgba(230, 126, 34, 0.05);
+  letter-spacing: 3px;
+}
+
+.testp2 {
+  @apply text-lg font-light relative px-6 py-3;
+  color: #d35400;
+  letter-spacing: 1px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.testp2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: #d35400;
+  transition: all 0.4s ease;
+  transform: translateX(-50%);
+}
+
+.testp2:hover {
+  letter-spacing: 3px;
+}
+
+.testp2:hover::after {
+  width: 80%;
+}
+
+/* 优雅的淡入动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+.delay-200 {
+  animation-delay: 400ms;
+}
+
+/* 添加日式装饰元素 */
+.japanese-pattern {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  opacity: 0.03;
+  background-image: 
+    radial-gradient(circle at 100% 150%, #2c3e50 24%, white 24%, white 28%, #2c3e50 28%, #2c3e50 36%, white 36%, white 40%, transparent 40%, transparent),
+    radial-gradient(circle at 0 150%, #2c3e50 24%, white 24%, white 28%, #2c3e50 28%, #2c3e50 36%, white 36%, white 40%, transparent 40%, transparent),
+    radial-gradient(circle at 50% 100%, white 10%, #2c3e50 10%, #2c3e50 23%, white 23%, white 30%, #2c3e50 30%, #2c3e50 43%, white 43%, white 50%, #2c3e50 50%, #2c3e50 63%, white 63%, white 71%, transparent 71%, transparent);
+  background-size: 80px 80px;
+  pointer-events: none;
 }
