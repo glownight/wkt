@@ -28,7 +28,7 @@ body {
 }
 
 .testp2{
-  @apply text-xl font-medium relative px-6 py-3;
+  @apply text-xl font-medium relative;
   background: linear-gradient(120deg, #9c1f5f, #85139c);
   color: transparent;
   background-clip: text;
@@ -73,6 +73,8 @@ body {
   border-bottom: 1px solid rgba(93, 64, 55, 0.15);
   animation: slideIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   animation-delay: 300ms;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* 优雅的滑入动画 */

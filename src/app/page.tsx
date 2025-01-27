@@ -25,7 +25,7 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-          <div className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+          <div className="flex flex-col gap-5 row-start-2 items-center sm:items-start">
             <Divider className="bg-[#1f8e94]" dashed />
             <p className="bg-[#186f74]">“最最喜欢你，绿子。”</p>
             <p className="testp2">“什么程度？”</p>
