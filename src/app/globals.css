@@ -59,82 +59,65 @@ body {
 
 /* 日系风格文本样式 */
 .quote-text {
-  @apply text-xl font-light relative px-8 py-4 rounded-sm;
-  background: rgba(255, 255, 255, 0.05);
+  @apply text-xl font-light px-6 py-3 relative;
   color: #2c3e50;
-  border-left: 3px solid #e67e22;
-  letter-spacing: 2px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.quote-text:hover {
-  @apply transform -translate-y-1;
-  border-left-width: 5px;
-  background: rgba(230, 126, 34, 0.05);
-  letter-spacing: 3px;
+  letter-spacing: 1.5px;
+  border-bottom: 1px solid rgba(44, 62, 80, 0.15);
+  animation: slideIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .testp2 {
-  @apply text-lg font-light relative px-6 py-3;
-  color: #d35400;
+  @apply text-lg font-light px-6 py-3 relative;
+  color: #5D4037;
   letter-spacing: 1px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+  border-bottom: 1px solid rgba(93, 64, 55, 0.15);
+  animation: slideIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 300ms;
 }
 
-.testp2::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 1px;
-  background: #d35400;
-  transition: all 0.4s ease;
-  transform: translateX(-50%);
-}
-
-.testp2:hover {
-  letter-spacing: 3px;
-}
-
-.testp2:hover::after {
-  width: 80%;
-}
-
-/* 优雅的淡入动画 */
-@keyframes fadeIn {
-  from {
+/* 优雅的滑入动画 */
+@keyframes slideIn {
+  0% {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateX(-20px);
   }
-  to {
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
-.animate-fade-in {
-  animation: fadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  opacity: 0;
-}
-
-.delay-200 {
-  animation-delay: 400ms;
-}
-
-/* 添加日式装饰元素 */
+/* 日式装饰元素 - 调整为更适合移动端的位置和大小 */
 .japanese-pattern {
   position: fixed;
   top: 0;
   right: 0;
-  width: 200px;
-  height: 200px;
-  opacity: 0.03;
+  width: 150px;
+  height: 150px;
+  opacity: 0.02;
   background-image: 
     radial-gradient(circle at 100% 150%, #2c3e50 24%, white 24%, white 28%, #2c3e50 28%, #2c3e50 36%, white 36%, white 40%, transparent 40%, transparent),
     radial-gradient(circle at 0 150%, #2c3e50 24%, white 24%, white 28%, #2c3e50 28%, #2c3e50 36%, white 36%, white 40%, transparent 40%, transparent),
     radial-gradient(circle at 50% 100%, white 10%, #2c3e50 10%, #2c3e50 23%, white 23%, white 30%, #2c3e50 30%, #2c3e50 43%, white 43%, white 50%, #2c3e50 50%, #2c3e50 63%, white 63%, white 71%, transparent 71%, transparent);
-  background-size: 80px 80px;
+  background-size: 60px 60px;
   pointer-events: none;
+}
+
+/* 响应式调整 */
+@media (max-width: 640px) {
+  .quote-text {
+    @apply text-lg px-4 py-2;
+    letter-spacing: 1px;
+  }
+  
+  .testp2 {
+    @apply text-base px-4 py-2;
+    letter-spacing: 0.5px;
+  }
+  
+  .japanese-pattern {
+    width: 100px;
+    height: 100px;
+    background-size: 40px 40px;
+  }
 }
