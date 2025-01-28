@@ -29,8 +29,9 @@ body {
 
 .testp2{
   @apply text-xl font-medium relative;
-  background: linear-gradient(120deg, #9c1f5f, #85139c);
+  background: linear-gradient(120deg, #a34d79, #85139c);
   color: transparent;
+  font-weight: 900;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

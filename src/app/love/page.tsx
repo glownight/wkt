@@ -1,5 +1,3 @@
-import { Button } from "antd";
-import Link from "next/link";
 import "../../app/globals.css";
 import dynamic from "next/dynamic";
 
@@ -7,7 +5,7 @@ const Fireworks = dynamic(() => import("../../components/Fireworks"), {
   ssr: false,
 });
 
-export default function Forever() {
+export default function Love() {
   return (
     <>
       <Fireworks />
@@ -25,4 +23,4 @@ export default function Forever() {
       </div>
     </>
   );
-}
+} 

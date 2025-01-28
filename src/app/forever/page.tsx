@@ -1,5 +1,3 @@
-import { Button } from "antd";
-import Link from "next/link";
 import "../../app/globals.css";
 import dynamic from "next/dynamic";
 
