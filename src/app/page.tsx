@@ -29,7 +29,7 @@ export default function Home() {
           <div className="flex flex-col gap-2 row-start-2 items-center sm:items-start">
             <Divider className="bg-[#1f8e94]" dashed />
             <p className="testp2">
-              <TypeWriter text="最最喜欢你，wkt。" />
+              <TypeWriter text='"最最喜欢你，wkt。"' />
             </p>
             <p className="white-text">"什么程度？"</p>
             <p className="white-text">"像喜欢春天的熊一样。"</p>
