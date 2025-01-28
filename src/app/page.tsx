@@ -27,10 +27,10 @@ export default function Home() {
           </div>
           <div className="flex flex-col gap-5 row-start-2 items-center sm:items-start">
             <Divider className="bg-[#1f8e94]" dashed />
-            <p className="bg-[#186f74]">“最最喜欢你，绿子。”</p>
+            <p className="bg-[#186f74]">“最最喜欢你，wkt。”</p>
             <p className="testp2">“什么程度？”</p>
             <p className="white-text">"像喜欢春天的熊一样。"</p>
-            <p className="white-text">"春天的熊？"绿子再次仰起脸，"什么春天的熊？"</p>
+            <p className="white-text">"春天的熊？"，"什么春天的熊？"</p>
             <p className="white-text">
               "春天的原野里，你一个人正走着，对面走来一只可爱的小熊，浑身的毛活像天鹅绒，眼睛圆鼓鼓的。它这么对你说道：'你好，小姐，和我一块儿打滚玩好么？'接着，你就和小熊抱在一起，顺着长满三叶草的山坡咕噜咕噜滚下去，整整玩了一天。你说棒不棒？"
             </p>
