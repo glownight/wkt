@@ -8,7 +8,6 @@ interface TypeWriterProps {
 
 const TypeWriter: React.FC<TypeWriterProps> = ({ text, className }) => {
   const [displayText, setDisplayText] = useState('');
-  const [isTyping, setIsTyping] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
