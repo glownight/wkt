@@ -126,6 +126,6 @@ body {
 
 /* 添加新的样式类用于白色文本 */
 .white-text {
-  color: #ffffff !important; /* 使用 !important 确保优先级 */
+  color: #beabab !important; /* 使用 !important 确保优先级 */
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.3); /* 添加轻微阴影提高可读性 */
 }
