@@ -9,7 +9,6 @@ interface TypeWriterProps {
 
 const TypeWriter: React.FC<TypeWriterProps> = ({ text, className }) => {
   const [displayText, setDisplayText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [showHeart, setShowHeart] = useState(false);
 
@@ -23,32 +22,18 @@ const TypeWriter: React.FC<TypeWriterProps> = ({ text, className }) => {
     if (isPaused) return;
 
     const typeSpeed = 150; // 打字速度
-    const deleteSpeed = 50; // 删除速度
 
-    if (!isDeleting && displayText === text) {
+    if (displayText === text) {
       setShowHeart(true);
-      setTimeout(() => {
-        setShowHeart(false);
-        setIsDeleting(true);
-      }, 2000);
-      return;
-    }
-
-    if (isDeleting && displayText === '') {
-      setIsDeleting(false);
       return;
     }
 
     const timeout = setTimeout(() => {
-      if (isDeleting) {
-        setDisplayText(text.substring(0, displayText.length - 1));
-      } else {
-        setDisplayText(text.substring(0, displayText.length + 1));
-      }
-    }, isDeleting ? deleteSpeed : typeSpeed);
+      setDisplayText(text.substring(0, displayText.length + 1));
+    }, typeSpeed);
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, text, isPaused]);
+  }, [displayText, text, isPaused]);
 
   useEffect(() => {
     typeEffect();
