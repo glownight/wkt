@@ -13,9 +13,10 @@ const TypeWriter: React.FC<TypeWriterProps> = ({ text, className }) => {
   const [showHeart, setShowHeart] = useState(false);
 
   const handleClick = () => {
-    setIsPaused(true);
-    setDisplayText(text);
-    setShowHeart(true);
+    // 重置状态，重新开始打字效果
+    setDisplayText('');
+    setIsPaused(false);
+    setShowHeart(false);
   };
 
   const typeEffect = useCallback(() => {
