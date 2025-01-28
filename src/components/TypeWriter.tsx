@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useCallback } from 'react';
+import styles from './TypeWriter.module.css';
 
 interface TypeWriterProps {
   text: string;
@@ -10,10 +11,12 @@ const TypeWriter: React.FC<TypeWriterProps> = ({ text, className }) => {
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [showHeart, setShowHeart] = useState(false);
 
   const handleClick = () => {
     setIsPaused(true);
     setDisplayText(text);
+    setShowHeart(true);
   };
 
   const typeEffect = useCallback(() => {
@@ -23,7 +26,11 @@ const TypeWriter: React.FC<TypeWriterProps> = ({ text, className }) => {
     const deleteSpeed = 50; // 删除速度
 
     if (!isDeleting && displayText === text) {
-      setTimeout(() => setIsDeleting(true), 1000);
+      setShowHeart(true);
+      setTimeout(() => {
+        setShowHeart(false);
+        setIsDeleting(true);
+      }, 2000);
       return;
     }
 
@@ -48,8 +55,13 @@ const TypeWriter: React.FC<TypeWriterProps> = ({ text, className }) => {
   }, [typeEffect]);
 
   return (
-    <span onClick={handleClick} className={className} style={{ cursor: 'pointer' }}>
-      {displayText}
+    <span className="inline-flex items-center gap-2">
+      <span onClick={handleClick} className={className} style={{ cursor: 'pointer' }}>
+        {displayText}
+      </span>
+      {showHeart && (
+        <span className={styles.heart}>❤️</span>
+      )}
     </span>
   );
 };
