@@ -26,12 +26,12 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-          <div className="flex flex-col gap-5 row-start-2 items-center sm:items-start">
+          <div className="flex flex-col gap-2 row-start-2 items-center sm:items-start">
             <Divider className="bg-[#1f8e94]" dashed />
-            <p className="white-text">
+            <p className="testp2">
               <TypeWriter text="最最喜欢你，wkt。" />
             </p>
-            <p className="testp2">"什么程度？"</p>
+            <p className="white-text">"什么程度？"</p>
             <p className="white-text">"像喜欢春天的熊一样。"</p>
             <p className="white-text">"春天的熊？"，"什么春天的熊？"</p>
             <p className="white-text">
