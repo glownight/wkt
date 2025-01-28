@@ -2,6 +2,7 @@ import { Button, Divider } from "antd";
 import "./globals.css";
 import Link from "next/link";
 import dynamic from 'next/dynamic';
+import TypeWriter from '../components/TypeWriter';
 
 const Fireworks = dynamic(() => import('../components/Fireworks'), {
   ssr: false
@@ -28,7 +29,8 @@ export default function Home() {
           <div className="flex flex-col gap-5 row-start-2 items-center sm:items-start">
             <Divider className="bg-[#1f8e94]" dashed />
             <p className="white-text">
-  "最最喜欢你，wkt。"</p>
+              <TypeWriter text="最最喜欢你，wkt。" />
+            </p>
             <p className="testp2">"什么程度？"</p>
             <p className="white-text">"像喜欢春天的熊一样。"</p>
             <p className="white-text">"春天的熊？"，"什么春天的熊？"</p>
